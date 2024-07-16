@@ -2,11 +2,11 @@
  * @Author: matiastang
  * @Date: 2022-11-15 11:35:41
  * @LastEditors: matiastang
- * @LastEditTime: 2024-07-16 15:48:38
+ * @LastEditTime: 2024-07-16 17:30:53
  * @FilePath: /vue-storage/README.md
  * @Description: README
 -->
-# vue-storage
+# matias-vue-storage
 
 `vue` 的 `ref` 和 `reactive` 添加了本地持久化的能力。
 
@@ -16,21 +16,21 @@
 
 * `pnpm`
 ```sh
-$ pnpm add -D vue-storage
+$ pnpm add -D matias-vue-storage
 ```
 * `yarn`
 ```sh
-$ yarn add -D vue-storage
+$ yarn add -D matias-vue-storage
 ```
 * `npm`
 ```sh
-$ npm install -D vue-storage
+$ npm install -D matias-vue-storage
 ```
 
 ### 使用
 
 ```ts
-import { localRef, localReactive } from 'vue-storage'
+import { localRef, localReactive } from 'matias-vue-storage'
 
 const router = useRouter()
 
@@ -45,7 +45,7 @@ const changeObjectValue = () => {
     localObjectValue.random = Math.random() * 100
 }
 
-let localStringValue = localRef<string>(localKey + '_STRING')
+let localStringValue = localRef(localKey + '_STRING', Math.random() * 100 + '')
 
 const changeStringValue = () => {
     localStringValue.value = `${Math.random() * 100}`
@@ -56,4 +56,5 @@ const changeStringValue = () => {
 
 ### 0.1.0
 
-* 实现基本功能
+* `localRef`支持`string`、`boolean`、`number`
+* `localReactive`支持`object`

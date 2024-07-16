@@ -1,5 +1,5 @@
 {
-    "name": "vue-storage",
+    "name": "matias-vue-storage",
     "version": "0.1.0",
     "description": "`vue` 的 `ref` 和 `reactive` 添加了本地持久化的能力",
     "main": "./dist/index.umd.js",

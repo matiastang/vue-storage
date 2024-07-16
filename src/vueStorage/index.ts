@@ -2,7 +2,7 @@
  * @Author: matiastang
  * @Date: 2022-11-15 14:22:23
  * @LastEditors: matiastang
- * @LastEditTime: 2024-07-16 15:15:26
+ * @LastEditTime: 2024-07-16 17:13:43
  * @FilePath: /vue-storage/src/vueStorage/index.ts
  * @Description: vue 响应式storage
  */
@@ -16,13 +16,14 @@ import { localStorageRead, localStorageWrite, localStorageRemove } from 'matias-
  * @param deep
  * @returns
  */
-export const localRef = <T>(key: string, value?: T, deep?: boolean) => {
-    const refValue = ref(value || localStorageRead<T>(key))
+export const localRef = (key: string, value?: string | boolean | number, deep?: boolean) => {
+    const saveValue = value !== undefined ? value : localStorageRead<string | boolean | number>(key)
+    const refValue = ref<string | boolean | number | null>(saveValue)
 
     watch(
         refValue,
         (newValue) => {
-            if (newValue !== null && newValue !== undefined) {
+            if (newValue !== null) {
                 localStorageWrite(key, newValue)
             } else {
                 localStorageRemove(key)
@@ -50,7 +51,7 @@ export const localReactive = <T extends object>(key: string, value?: T, deep?: b
     watch(
         reactiveValue,
         (newValue) => {
-            if (Object.keys(newValue).length > 0) {
+            if (!newValue && typeof newValue === 'object') {
                 localStorageWrite(key, newValue)
             } else {
                 localStorageRemove(key)

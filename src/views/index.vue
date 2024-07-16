@@ -2,7 +2,7 @@
  * @Author: matiastang
  * @Date: 2022-11-15 15:34:13
  * @LastEditors: matiastang
- * @LastEditTime: 2024-07-16 15:22:07
+ * @LastEditTime: 2024-07-16 17:14:19
  * @FilePath: /vue-storage/src/views/index.vue
  * @Description: vue local storage 测试
 -->
@@ -13,9 +13,6 @@
         <div @click="changeStringValue">{{ `更新stringValue：${localStringValue}` }}</div>
         <div @click="changeBooleanValue">{{ `更新booleanValue：${localBooleanValue}` }}</div>
         <div @click="changeNumberValue">{{ `更新numberValue：${localNumberValue}` }}</div>
-        <div @click="changeSymbolValue">
-            {{ `更新symbolValue：${localSymbolValue?.toString()}` }}
-        </div>
         <div
             @click="
                 () => {
@@ -52,28 +49,22 @@ const changTestValue = () => {
     localTestValue.random = Math.random() * 100
 }
 
-let localStringValue = localRef<string>(localKey + '_STRING')
+let localStringValue = localRef(localKey + '_STRING', `${Math.random() * 100}`)
 
 const changeStringValue = () => {
     localStringValue.value = `${Math.random() * 100}`
 }
 
-let localBooleanValue = localRef<boolean>(localKey + '_BOOLEAN')
+let localBooleanValue = localRef(localKey + '_BOOLEAN', false)
 
 const changeBooleanValue = () => {
     localBooleanValue.value = !localBooleanValue.value
 }
 
-let localNumberValue = localRef<number>(localKey + '_NUMBER')
+let localNumberValue = localRef(localKey + '_NUMBER', Math.random() * 100)
 
 const changeNumberValue = () => {
     localNumberValue.value = Math.random() * 100
-}
-
-let localSymbolValue = localRef<symbol>(localKey + '_SYMBOL')
-
-const changeSymbolValue = () => {
-    localSymbolValue.value = Symbol(Math.random() * 100)
 }
 </script>
 <style lang="less" scoped>
